@@ -1,5 +1,5 @@
 {
-  "name": "PenPot Utils",
+  "name": "TrueNAS Utils",
   "code": "plugin.js",
   "description": "A utility plugin for PenPot that aims to make tedious tasks more efficient",
   "permissions": ["content:read", "content:write"]
