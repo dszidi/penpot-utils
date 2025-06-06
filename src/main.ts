@@ -68,14 +68,21 @@ slotRange.addEventListener("input", () => {
     // Send a list even if it is a range
     payload = isRange ? rangeToList(value) : value.split(',').filter(Boolean);  
 
+  } else {
+    if (value.length === 0) {
+      // send empty array if input event is completely empty
+      payload = [];
+    } else {
+      return;
+    }
+  }
+
     const notification = {
       message: 'set-range',
       data: payload,
     };
 
     parent.postMessage(notification, "*");
-  }
-
 });
 
 function rangeToList (range: string): string[] {

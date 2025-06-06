@@ -32,7 +32,7 @@ penpot.ui.onMessage<Notification>((notification: Notification) => {
       enclosureConfig.selectedEnclosure = notification.data as string;
       break;
     case 'set-range':
-      enclosureConfig.slotList = notification.data ? notification.data as string[] : [];
+      enclosureConfig.slotList = notification.data && notification.data.length ? notification.data as string[] : [];
       break;
     case 'select-all-drivetray-handles':    
       const currentPage: Page | null = penpot.currentPage;
