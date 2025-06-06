@@ -66,15 +66,16 @@ slotRange.addEventListener("input", () => {
     
   if (value && isValid) {
     // Send a list even if it is a range
-    payload = isRange ? rangeToList(value) : value.split(',').filter(Boolean);
-  } 
+    payload = isRange ? rangeToList(value) : value.split(',').filter(Boolean);  
 
-  const notification = {
-    message: 'set-range',
-    data: payload,
+    const notification = {
+      message: 'set-range',
+      data: payload,
+    };
+
+    parent.postMessage(notification, "*");
   }
 
-  parent.postMessage(notification, "*");
 });
 
 function rangeToList (range: string): string[] {
@@ -82,7 +83,7 @@ function rangeToList (range: string): string[] {
   
   // Assume everything is already validated
   // Sort based on numeric value
-  const sanitized = range.split('-').map((slot) => Number(slot)).sort().map((slot) => slot.toString());
+  const sanitized = range.split('-').map((slot) => Number(slot)).sort((a, b) => a - b).map((slot) => slot.toString());
 
   for (let i = Number(sanitized[0]); i <= Number(sanitized[1]); i++) {
     list.push(i.toString());
