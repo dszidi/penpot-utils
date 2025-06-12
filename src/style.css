@@ -1,17 +1,22 @@
 @import "@penpot/plugin-styles/styles.css";
 
-body {
+html,body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   padding: 10px;
+  /*min-width: 800px;*/
 }
 
 p {
   margin-block-end: 0.75rem;
   font-size: 0.75rem;
+}
+
+.hidden {
+  display: none;
 }
 
 .form-group {
@@ -30,4 +35,43 @@ p {
 
 .input {
   width: 100%;
+}
+
+.input-label,
+.select-label {
+  font-size: var(--font-size-s);
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+}
+
+.tools, .svg-preview {
+  display: inline-block;
+}
+
+.tools { 
+  --tools-width: 450px;
+  width: var(--tools-width);
+  /*margin-right: 32px;*/
+}
+
+.svg-preview {
+  width: 100%;
+  padding: 0 24px;
+  /*display: none;*/
+  position: absolute;
+  left: calc(100vw * -3);
+}
+
+#user-preview {
+  width: calc(100% - 96px;);
+  height: calc(100vh - 100px);
+  background: unset;
+  border: solid 1px rgba(255,255,255,0.1);
+  border-radius: 12px;
+  font-family: monospace;
+  overflow: auto;
 }

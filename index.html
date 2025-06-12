@@ -7,28 +7,47 @@
     <link id="theme" href="css/main.css?ts=1748868958905" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <p>Enclosure Drivetray Selector</p>
-
-    <div class="form-group">
-      <label class="select-label-hidden" for="enclosure-select">Choose an enclosure component instance:</label>
-      <select id="enclosure-select" class="select">
-      </select>
-
-      <button class="aux-button" type="button" data-appearance="secondary" data-handler="list-enclosures">
-        Refresh 
-      </button>
-    </div>
-
-      <div class="form-group">
-        <label class="input-label-hidden" for="input-3">Select a range of slots</label>
-        <input id="slot-range" class="input" type="text" placeholder="Slot Range eg. 01-12">
+    <div class="content">
+      <div class="tools">
+        <p>Drivetray Selector</p>
+  
+        <div class="form-group">
+          <label class="select-label" for="enclosure-select">Enclosure instance:</label>
+          <select id="enclosure-select" class="select">
+          </select>
+    
+          <button class="aux-button" type="button" data-appearance="secondary" data-handler="list-enclosures">
+            Refresh 
+          </button>
+        </div>
+    
+          <div class="form-group">
+            <label class="input-label" for="slot-range">Slots</label>
+            <input id="slot-range" class="input" type="text" placeholder="Slot Range or List eg. 1-12 or 1,2,3">
+          </div>
+    
+        <div class="form-group form-actions">
+          <button id="btn-apply-selection" type="button" data-appearance="primary" data-handler="select-all-drivetray-handles">
+            Apply Selection
+          </button>
+        </div>
+    
+        <div class="form-group form-actions">
+          <button id="btn-copy-markup" type="button" data-appearance="secondary" data-handler="export-as-svg">
+            Copy Enclosure to Clipboard 
+          </button>
+        </div>
       </div>
+  
+      <div class="svg-preview">
+        <p>SVG Markup</p>
 
-    <div class="form-group form-actions">
-      <button type="button" data-appearance="primary" data-handler="select-all-drivetray-handles">
-        Apply Selection
-      </button>
-    </div>
+        <div id="user-preview"></div>
+  
+        <label class="select-label-hidden" for="svg-preview">SVG Preview:</label>
+        <textarea id="hidden-preview" class="textarea" cols="53" readonly></textarea>
+      </div>
+    </div> <!-- END CONTENT -->
 
     <script type="module" src="/src/main.ts"></script>
   </body>

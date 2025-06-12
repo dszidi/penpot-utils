@@ -15,9 +15,20 @@ document.querySelector("[data-handler='list-enclosures']")?.addEventListener("cl
   parent.postMessage({ message: "list-enclosure-options" }, "*");
 });
 
-document.querySelector("[data-handler='select-all-drivetray-handles']")?.addEventListener("click", () => {
+// document.querySelector("[data-handler='select-all-drivetray-handles']")
+const btnApply = document.getElementById('btn-apply-selection');
+btnApply?.addEventListener("click", () => {
   // send message to plugin.ts
   parent.postMessage({ message: "select-all-drivetray-handles" }, "*");
+  btnApply.blur();
+});
+
+// document.querySelector("[data-handler='export-as-svg']")
+const btnCopy = document.getElementById('btn-apply-selection');
+btnCopy?.addEventListener("click", () => {
+  // send message to plugin.ts
+  parent.postMessage({ message: "export-as-svg" }, "*");
+  // btnCopy.blur();
 });
 
 
@@ -142,11 +153,41 @@ function isValidList (value: string): boolean {
 
 
 // PLUGIN EVENTS
+const hiddenPreview = document.getElementById("hidden-preview") as HTMLSelectElement;
+// const userPreview = document.getElementById("user-preview") as HTMLSelectElement;
+
 window.addEventListener("message", (event) => {
   const notification: Notification = event.data;
   switch (notification.message) {
     case "enclosure-options": 
       updateSelectOptions(notification.data as string[]);
+      break;
+    case "copy-to-clipboard": 
+      console.log(notification.data);
+      console.log(navigator);
+      // userPreview.innerText = notification.data as string;
+      //hiddenPreview.innerText = notification.data as string;
+      hiddenPreview.value = notification.data as string;
+      // navigator.clipboard.writeText(notification.data as string);
+      
+      hiddenPreview.focus();
+      hiddenPreview.select();
+      
+      try {
+        const successful = document.execCommand("copy");
+        console.log("Copy command was " + (successful ? "successful" : "unsuccessful"));
+        return successful;
+      } catch (err) {
+        console.error("Error during copy attempt:", err);
+        return false;
+      } finally {
+        // Optional: clear the field afterward
+        hiddenPreview.innerText = "";
+        hiddenPreview.value = "";
+        hiddenPreview.blur();
+        btnCopy.blur();
+        console.log('FINISHING...');
+      }
       break;
   default:
     console.warn(notification);
